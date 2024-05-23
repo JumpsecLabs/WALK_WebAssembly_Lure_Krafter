@@ -1,0 +1,12 @@
+[package]
+name = "wasm_lure_crafter"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+dialoguer = "0.10.0"
+colored = "2.0.0"
+rand = "0.8.5"
+chrono = "0.4"
+base64 = "0.13.0"
+regex = "1.5.4"
