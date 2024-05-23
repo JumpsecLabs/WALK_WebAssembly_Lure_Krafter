@@ -1,4 +1,5 @@
 # W.A.L.K. - Web Assembly Lure Krafter
+A web assembly (WASM) lure generator based on custom lure templates and written in Rust with some GenAI assistance. 
 
 ![Untitled](imgs/Untitled.png)
 
