@@ -8,8 +8,9 @@ use chrono::Utc;
 use regex::Regex;
 use base64;
 use std::io::Read;
+use std::path::PathBuf;
 
-fn generate_lure(lure_type: &str, payload_format: &str, file_path: &str, payload_name: &str) -> Result<(), Box<dyn std::error::Error>> {
+fn generate_lure(lure_type: &str, payload_format: &str, file_path: &str, payload_name: &str) -> Result<PathBuf, Box<dyn std::error::Error>> {
     println!("{}", format!("[*] Generating lure of type: {}", lure_type).yellow());
 
     // Read the file and encode its contents to base64
@@ -99,7 +100,7 @@ fn generate_lure(lure_type: &str, payload_format: &str, file_path: &str, payload
     let html_path = target_dir.join("index.html");
     fs::write(html_path, html_content)?;
 
-    Ok(())
+    Ok(target_dir)
 }
 
 
@@ -206,7 +207,9 @@ fn main() {
         .unwrap();
 
     match generate_lure(&lure_types[selection], &payload_format, &file_path, &payload_name) {
-        Ok(()) => println!("{}", "[+] Lure generated successfully.".green()),
+        Ok(target_dir) => {
+            println!("{}", format!("[+] Lure generated successfully. \n[+] Look for the index.html file in the {} directory.", target_dir.display()).green());
+        },
         Err(e) => println!("{}", format!("[-] {}", e).red()),
     }
 }
