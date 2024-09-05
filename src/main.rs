@@ -133,7 +133,7 @@ fn modify_wasm_smuggling_json(target_dir: &Path) -> Result<(), io::Error> {
     content = load_function_pattern.replace(&content, new_load_function).to_string();
 
     // Preparing the new __wbg_init function with the Base64-encoded WASM content
-    let re_init = Regex::new(r"async function __wbg_init\(module_or_path\) \{[\s\S]*?\n\}").unwrap();
+    let re_init = Regex::new(r"async function __wbg_init\(input\) \{[\s\S]*?\n\}").unwrap();
     let new_init_function = format!(r#"async function __wbg_init(input) {{
         if (wasm !== undefined) return wasm;
         const imports = __wbg_get_imports();
